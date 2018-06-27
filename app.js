@@ -43,16 +43,34 @@ const server = http.createServer((request, response) => {
         body.push(chunk);
     }).on('end', () => {
         body = Buffer.concat(body).toString();
+        const targetTag = config.targetTag;
+        const tag = body.push_data && body.push_data.tag ? body.push_data.tag : '';
 
-        console.log(body);
         try {
             body = JSON.parse(body);
 
-            if ( body.push_data.tag !== config.targetTag) {
-                response.statusCode = 200;
-                response.setHeader('Content-Type', 'text/plain');
-                response.end('ok');
-                return;
+            if (tag) {
+                let shouldSkip;
+
+                if (tag.indexOf('*') !== -1) {
+                    const searchPattern = targetTag.replace('*', '');
+
+                    if (searchPattern) {
+                        shouldSkip = tag.indexOf(searchPattern) === -1;
+                    } else {
+                        // if we get here it means that targetTag was '*' and we update on all tags
+                        shouldSkip = false;
+                    }
+                } else {
+                    shouldSkip = tag !== targetTag;
+                }
+
+                if (shouldSkip) {
+                    response.statusCode = 200;
+                    response.setHeader('Content-Type', 'text/plain');
+                    response.end('ok');
+                    return;
+                }
             }
 
             console.log('starting update');

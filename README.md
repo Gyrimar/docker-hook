@@ -17,7 +17,8 @@ Settings can be set by modifying `./conf.js` or exporting environment variables:
   (default `someNotProperToken`)
   * DOCKER_HOOK_SCRIPT_PATH - path to `file.sh` which will be execute (no default value, required)
   * DOCKER_HOOK_TARGET_TAG - docker.io provides tag in data, it uses for filtering on which tag refresh
-   local images (default `latest-dev`)
+   local images (default `latest-dev`). Supports wildcard for example  `*-dev` - will update on tags `latest-dev`, 
+   `latest-web-dev` and so on.
    
    
 To start server type:
