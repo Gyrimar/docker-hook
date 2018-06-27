@@ -1,0 +1,27 @@
+{
+  "name": "docker-hook",
+  "version": "1.0.0",
+  "description": "Tiny web server to listen for docker.io hooks and update docker images",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gyrimar/docker-hook.git"
+  },
+  "keywords": [
+    "docker",
+    "hooks",
+    "update",
+    "image",
+    "automaticly"
+  ],
+  "author": "Gyrimar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Gyrimar/docker-hook/issues"
+  },
+  "homepage": "https://github.com/Gyrimar/docker-hook#readme"
+}
